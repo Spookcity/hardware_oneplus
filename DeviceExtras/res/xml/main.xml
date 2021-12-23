@@ -80,18 +80,6 @@
         </Preference>
 
         <Preference
-            android:key="kcal"
-            android:persistent="false"
-            android:icon="@drawable/ic_kcal"
-            android:title="@string/device_kcal_title"
-            android:summary="@string/kcal_enabled_summary">
-            <intent
-                android:action="android.intent.action.MAIN"
-                android:targetClass="org.evolution.device.DeviceExtras.kcal.KCalSettingsActivity"
-                android:targetPackage="org.evolution.device.DeviceExtras.kcal" />
-       </Preference>
-
-       <Preference
             android:key="panel_modes"
             android:icon="@drawable/ic_panel_modes"
             android:title="@string/panel_modes_title"
@@ -127,11 +115,11 @@
             android:icon="@drawable/ic_autohbm_threshold"
             android:title="@string/auto_hbm_threshold_title"
             android:summary="@string/auto_hbm_threshold_summary" />
-			
+
         <Preference
             android:key="hbm_info"
             android:icon="@drawable/ic_info_outline"
-            android:summary="@string/hbm_mode_warning" 
+            android:summary="@string/hbm_mode_warning"
             android:persistent="false" />
     </PreferenceCategory>
 

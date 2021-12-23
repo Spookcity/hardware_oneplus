@@ -37,7 +37,6 @@ public class Startup extends BroadcastReceiver {
         DeviceExtras.restoreSliderStates(context);
         EarGainPreference.restore(context);
         org.evolution.device.DeviceExtras.doze.DozeUtils.checkDozeService(context);
-        org.evolution.device.DeviceExtras.kcal.KCalSettings.restore(context);
         MicGainPreference.restore(context);
         VibratorCallStrengthPreference.restore(context);
         VibratorNotifStrengthPreference.restore(context);
