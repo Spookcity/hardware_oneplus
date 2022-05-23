@@ -30,5 +30,7 @@ cc_binary {
         "vendor.oneplus.fingerprint.extension@1.0",
         "vendor.oneplus.hardware.display@1.0",
     ],
-
+    header_libs: [
+        "generated_kernel_headers",
+    ],
 }
