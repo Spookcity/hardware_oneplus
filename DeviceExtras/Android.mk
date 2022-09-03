@@ -28,8 +28,7 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_USE_AAPT2 := true
 
 LOCAL_STATIC_ANDROID_LIBRARIES := \
-    androidx.core_core \
-    androidx.preference_preference
+    SettingsLib
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
     vendor.oneplus.hardware.camera-V1.0-java
@@ -45,5 +44,4 @@ package_resource_overlays := $(strip \
     $(wildcard $(foreach dir, $(DEVICE_PACKAGE_OVERLAYS), \
       $(addprefix $(dir)/, packages/apps/DeviceExtras/res))))
 
-include frameworks/base/packages/SettingsLib/common.mk
 include $(BUILD_PACKAGE)

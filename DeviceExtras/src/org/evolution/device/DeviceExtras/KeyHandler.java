@@ -26,7 +26,6 @@ import android.media.AudioManager;
 import android.os.FileObserver;
 import android.os.RemoteException;
 import android.os.UserHandle;
-import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.provider.Settings;
 import android.util.Log;
@@ -66,11 +65,6 @@ public class KeyHandler implements DeviceKeyHandler {
     private final NotificationRingerController mNotificationRingerController;
 
     private SliderControllerBase mSliderController;
-
-// Vibration effects
-    private Vibrator mVibrator;
-    private static final VibrationEffect MODE_VIBRATION_EFFECT =
-            VibrationEffect.get(VibrationEffect.EFFECT_DOUBLE_CLICK);
 
     private final BroadcastReceiver mSliderUpdateReceiver = new BroadcastReceiver() {
         @Override
@@ -140,8 +134,6 @@ public class KeyHandler implements DeviceKeyHandler {
         mContext.registerReceiver(mSliderUpdateReceiver,
                 new IntentFilter(Constants.ACTION_UPDATE_SLIDER_SETTINGS));
 
-        mVibrator = mContext.getSystemService(Vibrator.class);
-
         if (PackageUtils.isAvailableApp(CLIENT_PACKAGE_NAME, mContext)) {
             IntentFilter systemStateFilter = new IntentFilter(Intent.ACTION_SCREEN_ON);
             systemStateFilter.addAction(Intent.ACTION_SCREEN_OFF);
@@ -175,15 +167,7 @@ public class KeyHandler implements DeviceKeyHandler {
 
         mSliderController.processEvent(mContext, scanCode);
 
-
-        doHapticFeedback(MODE_VIBRATION_EFFECT);
         return null;
-    }
-
-    private void doHapticFeedback(VibrationEffect effect) {
-        if (mVibrator != null && mVibrator.hasVibrator()) {
-            mVibrator.vibrate(effect);
-        }
     }
 
     private void onDisplayOn() {

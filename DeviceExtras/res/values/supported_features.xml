@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Copyright (c) 2021 The Evolution X project
+    Copyright (c) 2021-2022 The Evolution X project
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -17,8 +17,14 @@
 
 <resources>
 
+    <!-- Whether device supports Dolby -->
+    <bool name="config_deviceSupportsDolby">false</bool>
+
     <!-- Whether device supports GameMode -->
     <bool name="config_deviceSupportsGameMode">false</bool>
+
+    <!-- Whether device supports Touch Screen Gestures -->
+    <bool name="config_deviceSupportsTouchScreenGestures">false</bool>
 
     <!-- Whether device supports DC-dimming -->
     <bool name="config_deviceSupportsDCdimming">false</bool>
@@ -31,6 +37,9 @@
 
     <!-- Whether device supports USB2.0 Force Fastcharge -->
     <bool name="config_deviceSupportsUSB2FC">false</bool>
+
+    <!-- Whether device supports OTG -->
+    <bool name="config_deviceSupportsOTG">false</bool>
 
     <!-- Whether device supports Earpiece gain -->
     <bool name="config_deviceSupportsEarGain">false</bool>
@@ -47,9 +56,6 @@
     <!-- Whether device supports System vibration intensity -->
     <bool name="config_deviceSupportsSysVib">false</bool>
 
-    <!-- Whether device supports msm touchboost -->
-    <bool name="config_deviceSupportsTouchboost">false</bool>
-
     <!-- Whether device supports Panel Modes -->
     <bool name="config_deviceSupportsPanelModes">false</bool>
 
@@ -58,4 +64,7 @@
 
     <!-- Whether device supports FPS overlay -->
     <bool name="config_deviceSupportsFPS">false</bool>
+
+    <!-- Whether device supports TP Edge Limit -->
+    <bool name="config_deviceSupportsTPEdgeLimit">false</bool>
 </resources>

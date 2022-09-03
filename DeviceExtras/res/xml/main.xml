@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
      Copyright (C) 2014-2016 The OmniROM Project
-     Copyright (C) 2021 The Evolution X Project
-     Copyright (C) 2018 The Xiaomi-SDM660 Project
+     Copyright (C) 2021-2022 The Evolution X Project
      Copyright (C) 2018-2021 crDroid Android Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,7 +15,8 @@
      limitations under the License.
 -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:settings="http://schemas.android.com/apk/res/org.evolution.device.DeviceExtras">
+	xmlns:settings="http://schemas.android.com/apk/res/org.evolution.device.DeviceExtras"
+ 	android.title="@string/device_extras_title">
 
     <PreferenceCategory
         android:key="slider"
@@ -24,7 +24,6 @@
 
         <ListPreference
             android:key="slider_usage"
-            android:icon="@drawable/ic_slider"
             android:dialogTitle="@string/notification_slider_usage_title"
             android:title="@string/notification_slider_usage_title"
             android:entries="@array/notification_slider_usage_entries"
@@ -33,36 +32,34 @@
 
         <ListPreference
             android:key="action_top_position"
-            android:icon="@drawable/ic_up"
             android:dialogTitle="@string/notification_slider_selection_dialog_title"
             android:title="@string/notification_slider_top_position"
             android:summary="%s" />
 
         <ListPreference
             android:key="action_middle_position"
-            android:icon="@drawable/ic_middle"
             android:dialogTitle="@string/notification_slider_selection_dialog_title"
             android:title="@string/notification_slider_middle_position"
             android:summary="%s" />
 
         <ListPreference
             android:key="action_bottom_position"
-            android:icon="@drawable/ic_down"
             android:dialogTitle="@string/notification_slider_selection_dialog_title"
             android:title="@string/notification_slider_bottom_position"
             android:summary="%s" />
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="cpu"
-        android:title="@string/category_cpu">
+        android:key="audio"
+        android:title="@string/audio_title">
 
-        <SwitchPreference
-            android:key="touchboost"
-            android:defaultValue="true"
-            android:icon="@drawable/ic_touchboost"
-            android:title="@string/touchboost_title"
-            android:summary="@string/touchboost_summary" />
+        <Preference
+            android:key="audio_dolby_atmos"
+            android:title="@string/dolby_title"
+            android:summary="@string/dolby_summary" >
+            <intent android:targetPackage="com.dolby.daxappui"
+                    android:targetClass="com.dolby.daxappui.MainActivity" />
+        </Preference>
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -71,7 +68,6 @@
 
         <Preference
             android:key="advanced_doze_settings"
-            android:icon="@drawable/ic_doze"
             android:title="@string/ambient_display_gestures_title"
             android:summary="@string/ambient_display_gestures_summary"
             android:persistent="false" >
@@ -79,9 +75,8 @@
                     android:targetClass="org.evolution.device.DeviceExtras.DozeSettingsActivity" />
         </Preference>
 
-        <Preference
+       <Preference
             android:key="panel_modes"
-            android:icon="@drawable/ic_panel_modes"
             android:title="@string/panel_modes_title"
             android:summary="@string/panel_modes_summary"
             android:persistent="false" >
@@ -93,33 +88,29 @@
 
         <SwitchPreference
             android:key="dc"
-            android:icon="@drawable/ic_dc_mode"
             android:title="@string/dc_mode_title"
             android:summary="@string/dc_mode_summary" />
 
         <SwitchPreference
             android:key="hbm"
-            android:icon="@drawable/ic_hbm_mode"
             android:title="@string/hbm_mode_title"
             android:summary="@string/hbm_mode_summary"
             android:defaultValue="false" />
 
         <SwitchPreference
             android:key="auto_hbm"
-            android:icon="@drawable/ic_autohbm_mode"
             android:title="@string/auto_hbm_title"
             android:summary="@string/auto_hbm_summary" />
 
         <org.evolution.device.DeviceExtras.AutoHBMThresholdPreference
             android:key="auto_hbm_threshold"
-            android:icon="@drawable/ic_autohbm_threshold"
             android:title="@string/auto_hbm_threshold_title"
             android:summary="@string/auto_hbm_threshold_summary" />
-
+			
         <Preference
             android:key="hbm_info"
             android:icon="@drawable/ic_info_outline"
-            android:summary="@string/hbm_mode_warning"
+            android:summary="@string/hbm_mode_warning" 
             android:persistent="false" />
     </PreferenceCategory>
 
@@ -129,7 +120,6 @@
 
         <SwitchPreference
             android:key="fps_info"
-            android:icon="@drawable/ic_fps_overlay"
             android:title="@string/fps_info_title"
             android:summary="@string/fps_info_summary"
             android:persistent="true" />
@@ -137,7 +127,6 @@
         <ListPreference
             android:key="fps_info_position"
             android:defaultValue="0"
-            android:icon="@drawable/ic_fps_position"
             android:title="@string/fps_info_position_title"
             android:summary="%s"
             android:entries="@array/fps_info_position_entries"
@@ -146,7 +135,6 @@
         <ListPreference
             android:key="fps_info_color"
             android:defaultValue="0"
-            android:icon="@drawable/ic_fps_color"
             android:title="@string/fps_info_color_title"
             android:summary="%s"
             android:entries="@array/fps_info_color_entries"
@@ -154,7 +142,6 @@
 
         <org.evolution.device.DeviceExtras.CustomSeekBarPreference
             android:key="fps_info_text_size"
-            android:icon="@drawable/ic_fps_text"
             android:title="@string/fps_info_text_size_title"
             android:persistent="true"
             android:max="5"
@@ -167,9 +154,18 @@
         android:key="touchscreen"
         android:title="@string/touchscreen_title">
 
+        <Preference
+            android:key="touchscreen_gestures"
+            android:title="@string/touchscreen_gesture_settings_title"
+            android:summary="@string/touchscreen_gesture_settings_summary"
+            android:persistent="false" >
+            <intent android:action="android.intent.action.MAIN"
+                    android:targetPackage="org.evolution.device.DeviceExtras"
+                    android:targetClass="org.evolution.device.DeviceExtras.TouchscreenGestureSettings" />
+        </Preference>
+
         <SwitchPreference
             android:key="game_mode"
-            android:icon="@drawable/ic_game_mode"
             android:summary="@string/game_mode_summary"
             android:title="@string/game_mode_title" />
 
@@ -177,6 +173,11 @@
             android:icon="@drawable/ic_info_outline"
             android:summary="@string/game_mode_warning"
             android:persistent="false" />
+
+        <SwitchPreference
+            android:key="tp_edge_limit"
+            android:summary="@string/tp_edge_limit_mode_summary"
+            android:title="@string/tp_edge_limit_mode_title" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -185,13 +186,11 @@
 
         <org.evolution.device.DeviceExtras.EarGainPreference
             android:key="earpiece_gain"
-            android:icon="@drawable/ic_earpiece"
             android:title="@string/ear_gain_title"
             android:summary="@string/ear_gain_summary" />
 
         <org.evolution.device.DeviceExtras.MicGainPreference
             android:key="microphone_gain"
-            android:icon="@drawable/ic_microphone"
             android:title="@string/mic_gain_title"
             android:summary="@string/mic_gain_summary" />
     </PreferenceCategory>
@@ -202,9 +201,13 @@
 
         <SwitchPreference
             android:key="usb2_fast_charge"
-            android:icon="@drawable/ic_usb2_fc"
             android:summary="@string/usb2_fc_summary"
             android:title="@string/usb2_fc_title" />
+
+        <SwitchPreference
+            android:key="otg"
+            android:summary="@string/otg_summary"
+            android:title="@string/otg_title" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -213,19 +216,16 @@
 
         <org.evolution.device.DeviceExtras.VibratorStrengthPreference
             android:key="vib_strength"
-            android:icon="@drawable/ic_vibration"
             android:title="@string/vib_strength_title"
             android:summary="@string/vib_strength_summary" />
 
         <org.evolution.device.DeviceExtras.VibratorCallStrengthPreference
             android:key="vib_call_strength"
-            android:icon="@drawable/ic_vibration"
             android:title="@string/vib_call_strength_title"
             android:summary="@string/vib_call_strength_summary" />
 
         <org.evolution.device.DeviceExtras.VibratorNotifStrengthPreference
             android:key="vib_notif_strength"
-            android:icon="@drawable/ic_vibration"
             android:title="@string/vib_notif_strength_title"
             android:summary="@string/vib_notif_strength_summary" />
     </PreferenceCategory>

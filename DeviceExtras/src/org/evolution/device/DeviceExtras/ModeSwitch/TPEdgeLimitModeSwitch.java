@@ -22,13 +22,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.PreferenceManager;
 
 import org.evolution.device.DeviceExtras.DeviceExtras;
 
-public class USB2FastChargeModeSwitch implements OnPreferenceChangeListener {
+public class TPEdgeLimitModeSwitch implements OnPreferenceChangeListener {
 
-    private static final int NODE = R.string.node_usb2_fast_charge_mode_switch;
+    private static final int NODE = R.string.node_tp_edge_limit_mode_switch;
 
     public static String getFile(Context context) {
         String file = context.getString(NODE);

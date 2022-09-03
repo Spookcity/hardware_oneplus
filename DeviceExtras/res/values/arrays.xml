@@ -3,7 +3,7 @@
      Copyright (C) 2015-2016 The CyanogenMod Project
      Copyright (C) 2017 The LineageOS Project
      Copyright (C) 2014-2016 The OmniROM Project
-     Copyright (C) 2021 The Evolution X Project
+     Copyright (C) 2021-2022 The Evolution X Project
      Copyright (C) 2018-2021 crDroid Android Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -165,5 +165,51 @@
         <item>0</item>
         <item>1</item>
         <item>2</item>
+    </string-array>
+
+    <!-- Screen off Gestures -->
+    <string-array name="touchscreen_gesture_action_entries">
+        <item>@string/touchscreen_gesture_action_do_nothing</item>
+        <item>@string/touchscreen_gesture_action_flashlight</item>
+        <item>@string/touchscreen_gesture_action_camera</item>
+        <item>@string/touchscreen_gesture_action_browser</item>
+        <item>@string/touchscreen_gesture_action_dialer</item>
+        <item>@string/touchscreen_gesture_action_email</item>
+        <item>@string/touchscreen_gesture_action_messages</item>
+        <item>@string/touchscreen_gesture_action_play_pause_music</item>
+        <item>@string/touchscreen_gesture_action_previous_track</item>
+        <item>@string/touchscreen_gesture_action_next_track</item>
+        <item>@string/touchscreen_gesture_action_volume_down</item>
+        <item>@string/touchscreen_gesture_action_volume_up</item>
+        <item>@string/touchscreen_gesture_action_ambient_display</item>
+        <item>@string/touchscreen_gesture_action_wake_device</item>
+        <item>@string/touchscreen_gesture_action_wechat_pay</item>
+        <item>@string/touchscreen_gesture_action_alipay_pay</item>
+        <item>@string/touchscreen_gesture_action_wechat_scan</item>
+        <item>@string/touchscreen_gesture_action_alipay_scan</item>
+        <item>@string/touchscreen_gesture_action_alipay_trip</item>
+        <item>@string/touchscreen_gesture_action_wallet_trip</item>
+    </string-array>
+    <string-array name="touchscreen_gesture_action_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
     </string-array>
 </resources>

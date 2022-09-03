@@ -1,7 +1,6 @@
 /*
 * Copyright (C) 2013 The OmniROM Project
-* Copyright (C) 2021 The Evolution X Project
-* Copyright (C) 2018 The Xiaomi-SDM660 Project
+* Copyright (C) 2021-2022 The Evolution X Project
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -24,10 +23,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.provider.Settings;
-import android.text.TextUtils;
 import androidx.preference.PreferenceManager;
 
 public class Startup extends BroadcastReceiver {
+
+    private static final String TAG = "BootReceiver";
+    private static final String ONE_TIME_TUNABLE_RESTORE = "hardware_tunable_restored";
 
     private boolean mHBM = false;
 
@@ -70,19 +71,33 @@ public class Startup extends BroadcastReceiver {
         mHBM = false;
         restore(SRGBModeSwitch.getFile(context), enabled);
  	       }
-        enabled = sharedPrefs.getBoolean(DeviceExtras.KEY_TOUCH_BOOST_SWITCH, false);
+        enabled = sharedPrefs.getBoolean(DeviceExtras.KEY_TP_EDGE_LIMIT_SWITCH, false);
         if (enabled) {
-        restore(TouchboostModeSwitch.getFile(context), enabled);
+            restore(TPEdgeLimitModeSwitch.getFile(context), enabled);
                }
         enabled = sharedPrefs.getBoolean(DeviceExtras.KEY_USB2_SWITCH, false);
         if (enabled) {
         restore(USB2FastChargeModeSwitch.getFile(context), enabled);
+               }
+        enabled = sharedPrefs.getBoolean(DeviceExtras.KEY_OTG_SWITCH, false);
+        if (enabled) {
+        restore(OTGModeSwitch.getFile(context), enabled);
                }
         enabled = sharedPrefs.getBoolean(DeviceExtras.KEY_WIDE_SWITCH, false);
         if (enabled) {
         mHBM = false;
         restore(WideModeSwitch.getFile(context), enabled);
         }
+    }
+
+    private boolean hasRestoredTunable(Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getBoolean(ONE_TIME_TUNABLE_RESTORE, false);
+    }
+
+    private void setRestoredTunable(Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        preferences.edit().putBoolean(ONE_TIME_TUNABLE_RESTORE, true).apply();
     }
 
     private void restore(String file, boolean enabled) {

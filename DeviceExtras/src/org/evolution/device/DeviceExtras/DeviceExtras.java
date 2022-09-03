@@ -1,7 +1,6 @@
 /*
 * Copyright (C) 2016 The OmniROM Project
-* Copyright (C) 2021 The Evolution X Project
-* Copyright (C) 2018 The Xiaomi-SDM660 Project
+* Copyright (C) 2021-2022 The Evolution X Project
 * Copyright (C) 2018-2021 crDroid Android Project
 *
 * This program is free software: you can redistribute it and/or modify
@@ -21,27 +20,18 @@
 package org.evolution.device.DeviceExtras;
 
 import android.app.ActivityManager;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragment;
 import androidx.preference.PreferenceGroup;
@@ -64,16 +54,14 @@ public class DeviceExtras extends PreferenceFragment
 
     public static final String KEY_SETTINGS_PREFIX = "device_setting_";
 
+    public static final String KEY_CATEGORY_AUDIO = "audio";
     public static final String KEY_CATEGORY_SLIDER = "slider";
-    public static final String KEY_CATEGORY_CPU = "cpu";
     public static final String KEY_CATEGORY_DISPLAY = "display";
     public static final String KEY_CATEGORY_FPS = "fps";
     public static final String KEY_CATEGORY_TOUCHSCREEN = "touchscreen";
     public static final String KEY_CATEGORY_SPEAKER_MIC = "speaker";
     public static final String KEY_CATEGORY_USB = "usb";
     public static final String KEY_CATEGORY_VIBRATOR = "vibrator";
-
-    public static final String KEY_TOUCH_BOOST_SWITCH = "touchboost";
 
     public static final String KEY_DOZE = "advanced_doze_settings";
     public static final String KEY_PANEL_MODES = "panel_modes";
@@ -88,17 +76,19 @@ public class DeviceExtras extends PreferenceFragment
     public static final String KEY_FPS_INFO_COLOR = "fps_info_color";
     public static final String KEY_FPS_INFO_TEXT_SIZE = "fps_info_text_size";
 
+    public static final String KEY_TOUCHSCREEN_GESTURES = "touchscreen_gestures";
     public static final String KEY_GAME_SWITCH = "game_mode";
+    public static final String KEY_TP_EDGE_LIMIT_SWITCH = "tp_edge_limit";
 
     public static final String KEY_EAR_GAIN = "earpiece_gain";
     public static final String KEY_MIC_GAIN = "microphone_gain";
 
     public static final String KEY_USB2_SWITCH = "usb2_fast_charge";
+    public static final String KEY_OTG_SWITCH = "otg";
 
     public static final String KEY_VIBSTRENGTH = "vib_strength";
     public static final String KEY_CALL_VIBSTRENGTH = "vib_call_strength";
     public static final String KEY_NOTIF_VIBSTRENGTH = "vib_notif_strength";
-
 
     public static final String KEY_DCI_SWITCH = "dci";
     public static final String KEY_SRGB_SWITCH = "srgb";
@@ -111,12 +101,14 @@ public class DeviceExtras extends PreferenceFragment
     private static TwoStatePreference mDCModeSwitch;
     private static TwoStatePreference mGameModeSwitch;
     private static TwoStatePreference mHBMModeSwitch;
-    private static TwoStatePreference mTouchboostModeSwitch;
+    private static TwoStatePreference mTPEdgeLimitModeSwitch;
     private static TwoStatePreference mUSB2FastChargeModeSwitch;
+    private static TwoStatePreference mOTGModeSwitch;
 
     private CustomSeekBarPreference mFpsInfoTextSizePreference;
     private EarGainPreference mEarGain;
     private Preference mDozeSettings;
+    private Preference mTouchScreenGestureSettings;
     private ListPreference mBottomKeyPref;
     private ListPreference mMiddleKeyPref;
     private ListPreference mTopKeyPref;
@@ -132,7 +124,13 @@ public class DeviceExtras extends PreferenceFragment
         getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
 
         Context context = this.getContext();
-        PackageManager pm = context.getPackageManager();
+
+        // Audio - Dolby
+        if (isFeatureSupported(context, R.bool.config_deviceSupportsDolby)) {
+        }
+        else {
+            getPreferenceScreen().removePreference((Preference) findPreference(KEY_CATEGORY_AUDIO));
+        }
 
         // Slider Preferences
         if (isFeatureSupported(context, R.bool.config_deviceSupportsAlertSlider)) {
@@ -140,21 +138,6 @@ public class DeviceExtras extends PreferenceFragment
         }
         else {
             getPreferenceScreen().removePreference((Preference) findPreference(KEY_CATEGORY_SLIDER));
-        }
-
-        // Touch boost
-        if (isFeatureSupported(context, R.bool.config_deviceSupportsTouchboost)) {
-            mTouchboostModeSwitch = (TwoStatePreference) findPreference(KEY_TOUCH_BOOST_SWITCH);
-            mTouchboostModeSwitch.setEnabled(TouchboostModeSwitch.isSupported(this.getContext()));
-            mTouchboostModeSwitch.setChecked(TouchboostModeSwitch.isCurrentlyEnabled(this.getContext()));
-            mTouchboostModeSwitch.setOnPreferenceChangeListener(new TouchboostModeSwitch());
-
-            pm.setComponentEnabledSetting (new ComponentName(context, TouchboostTileService.class), PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
-        }
-        else {
-            findPreference(KEY_TOUCH_BOOST_SWITCH).setVisible(false);
-            // Future : Add proper check for future in case more than 1 prop exists in CPU
-            getPreferenceScreen().removePreference((Preference) findPreference(KEY_CATEGORY_CPU));
         }
 
         boolean display = false;
@@ -170,7 +153,6 @@ public class DeviceExtras extends PreferenceFragment
         // Panel Modes
         display = display | isFeatureSupported(context, R.bool.config_deviceSupportsPanelModes);
         if (isFeatureSupported(context, R.bool.config_deviceSupportsPanelModes)) {
-            pm.setComponentEnabledSetting (new ComponentName(context, PanelModeTileService.class), PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
         }
         else {
             findPreference(KEY_PANEL_MODES).setVisible(false);
@@ -183,7 +165,6 @@ public class DeviceExtras extends PreferenceFragment
             mDCModeSwitch.setEnabled(DCModeSwitch.isSupported(this.getContext()));
             mDCModeSwitch.setChecked(DCModeSwitch.isCurrentlyEnabled(this.getContext()));
             mDCModeSwitch.setOnPreferenceChangeListener(new DCModeSwitch());
-            pm.setComponentEnabledSetting (new ComponentName(context, DCModeTileService.class), PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
         }
         else {
             findPreference(KEY_DC_SWITCH).setVisible(false);
@@ -196,8 +177,6 @@ public class DeviceExtras extends PreferenceFragment
             mHBMModeSwitch.setEnabled(HBMModeSwitch.isSupported(getContext()));
             mHBMModeSwitch.setChecked(PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean(DeviceExtras.KEY_HBM_SWITCH, false));
             mHBMModeSwitch.setOnPreferenceChangeListener(this);
-
-            pm.setComponentEnabledSetting (new ComponentName(context, HBMModeTileService.class), PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
         }
         else {
             findPreference(KEY_HBM_SWITCH).setVisible(false);
@@ -234,8 +213,6 @@ public class DeviceExtras extends PreferenceFragment
 
             mFpsInfoTextSizePreference = (CustomSeekBarPreference) findPreference(KEY_FPS_INFO_TEXT_SIZE);
             mFpsInfoTextSizePreference.setOnPreferenceChangeListener(this);
-
-            pm.setComponentEnabledSetting (new ComponentName(context, FPSTileService.class), PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
         }
         else {
             getPreferenceScreen().removePreference((Preference) findPreference(KEY_CATEGORY_FPS));
@@ -247,11 +224,24 @@ public class DeviceExtras extends PreferenceFragment
             mGameModeSwitch.setEnabled(GameModeSwitch.isSupported(this.getContext()));
             mGameModeSwitch.setChecked(GameModeSwitch.isCurrentlyEnabled(this.getContext()));
             mGameModeSwitch.setOnPreferenceChangeListener(new GameModeSwitch());
-
-            pm.setComponentEnabledSetting (new ComponentName(context, GameModeTileService.class), PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
         }
         else {
-            getPreferenceScreen().removePreference((Preference) findPreference(KEY_CATEGORY_TOUCHSCREEN));
+           findPreference(KEY_GAME_SWITCH).setVisible(false);
+        }
+
+        // TP Edge Limit
+        if (isFeatureSupported(context, R.bool.config_deviceSupportsTPEdgeLimit)) {
+            mTPEdgeLimitModeSwitch = (TwoStatePreference) findPreference(KEY_TP_EDGE_LIMIT_SWITCH);
+            mTPEdgeLimitModeSwitch.setEnabled(TPEdgeLimitModeSwitch.isSupported(this.getContext()));
+            mTPEdgeLimitModeSwitch.setChecked(TPEdgeLimitModeSwitch.isCurrentlyEnabled(this.getContext()));
+            mTPEdgeLimitModeSwitch.setOnPreferenceChangeListener(new TPEdgeLimitModeSwitch());
+        }
+        else {
+           findPreference(KEY_TP_EDGE_LIMIT_SWITCH).setVisible(false);
+        }
+
+        if (!isFeatureSupported(context, R.bool.config_deviceSupportsTouchScreenGestures)) {
+            getPreferenceScreen().removePreference((Preference) findPreference(KEY_TOUCHSCREEN_GESTURES));
         }
 
         boolean speakerSection = false;
@@ -290,11 +280,20 @@ public class DeviceExtras extends PreferenceFragment
             mUSB2FastChargeModeSwitch.setEnabled(USB2FastChargeModeSwitch.isSupported(this.getContext()));
             mUSB2FastChargeModeSwitch.setChecked(USB2FastChargeModeSwitch.isCurrentlyEnabled(this.getContext()));
             mUSB2FastChargeModeSwitch.setOnPreferenceChangeListener(new USB2FastChargeModeSwitch());
-
-            pm.setComponentEnabledSetting (new ComponentName(context, USB2FastChargeTileService.class), PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
         }
         else {
-            getPreferenceScreen().removePreference((Preference) findPreference(KEY_CATEGORY_USB));
+           findPreference(KEY_USB2_SWITCH).setVisible(false);
+        }
+
+        // OTG Switch
+        if (isFeatureSupported(context, R.bool.config_deviceSupportsOTG)) {
+            mOTGModeSwitch = (TwoStatePreference) findPreference(KEY_OTG_SWITCH);
+            mOTGModeSwitch.setEnabled(OTGModeSwitch.isSupported(this.getContext()));
+            mOTGModeSwitch.setChecked(OTGModeSwitch.isCurrentlyEnabled(this.getContext()));
+            mOTGModeSwitch.setOnPreferenceChangeListener(new OTGModeSwitch());
+        }
+        else {
+           findPreference(KEY_OTG_SWITCH).setVisible(false);
         }
 
         boolean vibrationAll = false;
@@ -310,7 +309,6 @@ public class DeviceExtras extends PreferenceFragment
         else {
             findPreference(KEY_VIBSTRENGTH).setVisible(false);
         }
-
 
         // Vibrator - Call
         vibrationAll = vibrationAll | isFeatureSupported(context, R.bool.config_deviceSupportsCallVib);
@@ -727,16 +725,5 @@ public class DeviceExtras extends PreferenceFragment
         Intent fpsinfo = new Intent(context, FPSInfoService.class);
         context.stopService(fpsinfo);
         context.startService(fpsinfo);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-        // Respond to the action bar's Up/Home button
-        case android.R.id.home:
-            getActivity().finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

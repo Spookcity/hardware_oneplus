@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
      Copyright (C) 2014-2016 The OmniROM Project
-     Copyright (C) 2021 The Evolution X Project
-     Copyright (C) 2018 The Xiaomi-SDM660 Project
+     Copyright (C) 2021-2022 The Evolution X Project
      Copyright (C) 2018-2021 crDroid Android Project
 
     Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,9 +16,9 @@
 -->
 <resources>
     <!-- Device Extras -->
-    <string name="device_title">Device Extras</string>
+    <string name="device_extras_title">Device Extras</string>
     <string name="device_summary">Adjust device specific settings</string>
-
+	
     <!-- Alert slider -->
     <string name="notification_slider_category_title">Alert slider</string>
     <string name="notification_slider_title">Alert slider settings</string>
@@ -52,10 +51,10 @@
     <string name="notification_slider_ringer_vibrate">Vibrate</string>
     <string name="notification_slider_ringer_silent">Silent</string>
 
-    <!-- CPU -->
-    <string name="category_cpu">CPU</string>
-    <string name="touchboost_title">Touchboost</string>
-    <string name="touchboost_summary">Boost CPU on touchscreen input</string>
+    <!-- Audio - Dolby -->
+    <string name="audio_title">Audio</string>
+    <string name="dolby_title">Dolby Atmos</string>
+    <string name="dolby_summary">Enhance your audio experience with dolby</string>
 
     <!-- Display -->
     <string name="display_title">Display</string>
@@ -96,6 +95,7 @@
     <string name="fps_info_text_size_title">Text size</string>
 
     <!-- Doze -->
+    <string name="ambient_enable">Use ambient display</string>
     <string name="ambient_display_title">Ambient display</string>
     <string name="ambient_display_enable_title">Ambient display</string>
     <string name="ambient_display_enable_summary">Wake screen when you receive notifications</string>
@@ -128,14 +128,60 @@
 
     <!-- Touchscreen -->
     <string name="touchscreen_title">Touchscreen</string>
+    <string name="touchscreen_gesture_settings_title">Touchscreen gestures</string>
+    <string name="touchscreen_gesture_settings_summary">Perform various touchscreen gestures for quick actions</string>
+    <string name="touchscreen_gesture_two_finger_down_swipe_title">Swipe down with two fingers</string>
+    <string name="touchscreen_gesture_one_finger_up_swipe_title">Swipe up with one finger</string>
+    <string name="touchscreen_gesture_one_finger_up_swipe_home_title">Swipe up from the home button</string>
+    <string name="touchscreen_gesture_one_finger_down_swipe_title">Swipe down with one finger</string>
+    <string name="touchscreen_gesture_one_finger_left_swipe_title">Swipe left with one finger</string>
+    <string name="touchscreen_gesture_one_finger_right_swipe_title">Swipe right with one finger</string>
+    <string name="touchscreen_gesture_single_tap_title">Single tap</string>
+    <string name="touchscreen_gesture_up_arrow_title">Draw a \"Λ\"</string>
+    <string name="touchscreen_gesture_down_arrow_title">Draw a \"V\"</string>
+    <string name="touchscreen_gesture_right_arrow_title">Draw a \"&lt;\"</string>
+    <string name="touchscreen_gesture_left_arrow_title">Draw a \"&gt;\"</string>
+    <string name="touchscreen_gesture_letter_c_title">Draw the letter \"C\"</string>
+    <string name="touchscreen_gesture_letter_e_title">Draw the letter \"e\"</string>
+    <string name="touchscreen_gesture_letter_o_title">Draw the letter \"O\"</string>
+    <string name="touchscreen_gesture_letter_m_title">Draw the letter \"M\"</string>
+    <string name="touchscreen_gesture_letter_s_title">Draw the letter \"S\"</string>
+    <string name="touchscreen_gesture_letter_v_title">Draw the letter \"V\"</string>
+    <string name="touchscreen_gesture_letter_w_title">Draw the letter \"W\"</string>
+    <string name="touchscreen_gesture_letter_z_title">Draw the letter \"Z\"</string>
+    <string name="touchscreen_gesture_action_dialog_title">Gesture action</string>
+    <string name="touchscreen_gesture_action_do_nothing">Do nothing</string>
+    <string name="touchscreen_gesture_action_flashlight">Toggle flashlight</string>
+    <string name="touchscreen_gesture_action_camera">Open the camera</string>
+    <string name="touchscreen_gesture_action_browser">Open the browser</string>
+    <string name="touchscreen_gesture_action_dialer">Open the dialer</string>
+    <string name="touchscreen_gesture_action_email">View your emails</string>
+    <string name="touchscreen_gesture_action_messages">View your messages</string>
+    <string name="touchscreen_gesture_action_play_pause_music">Play/pause music</string>
+    <string name="touchscreen_gesture_action_previous_track">Play the previous music track</string>
+    <string name="touchscreen_gesture_action_next_track">Play the next music track</string>
+    <string name="touchscreen_gesture_action_volume_down">Lower media volume</string>
+    <string name="touchscreen_gesture_action_volume_up">Raise media volume</string>
+    <string name="touchscreen_gesture_action_ambient_display">Show ambient display</string>
+    <string name="touchscreen_gesture_action_wake_device">Wake device</string>
+    <string name="touchscreen_gesture_action_wechat_pay">Wechat Pay</string>
+    <string name="touchscreen_gesture_action_alipay_pay">Alipay Pay</string>
+    <string name="touchscreen_gesture_action_wechat_scan">Wechat Scan</string>
+    <string name="touchscreen_gesture_action_alipay_scan">Alipay Scan</string>
+    <string name="touchscreen_gesture_action_alipay_trip">Alipay Trip</string>
+    <string name="touchscreen_gesture_action_wallet_trip">Wallet Trip</string>
     <string name="game_mode_title">Game mode</string>
     <string name="game_mode_summary">Force enable 240Hz sampling rate for all applications</string>
     <string name="game_mode_warning">May decrease battery life</string>
+    <string name="tp_edge_limit_mode_title">TP Edge Limit</string>
+    <string name="tp_edge_limit_mode_summary">Disable the touchpanels edge limit</string>
 
     <!-- USB -->
-    <string name="usb_title">USB</string>
+    <string name="usb_title">USB</string> 
     <string name="usb2_fc_title">USB 2.0 fast charge</string>
     <string name="usb2_fc_summary">Force fast charging of up to 900mA in USB 2.0 mode</string>
+    <string name="otg_title">USB-OTG</string>
+    <string name="otg_summary">Enable USB on-the-go mode</string>
 
     <!-- Vibrator -->
     <string name="category_vibrator">Vibrator</string>

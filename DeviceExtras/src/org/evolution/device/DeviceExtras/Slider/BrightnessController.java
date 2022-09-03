@@ -34,7 +34,7 @@ public final class BrightnessController extends SliderControllerBase {
     private static final int BRIGHTNESS_BRIGHTEST = 31;
     private static final int BRIGHTNESS_DARKEST = 32;
 
-    private static final int DARKEST = 0;
+    private static final int DARKEST = 1;
     private static final int BRIGHTEST = 255;
 
     public BrightnessController(Context context) {

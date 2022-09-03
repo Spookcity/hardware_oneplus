@@ -23,6 +23,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources;
 import android.os.UserHandle;
 import android.util.Log;
 
@@ -36,9 +37,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 
 public class FileUtils {
-    private static final String TAG = "FileUtils";
 
     private static boolean mServiceEnabled = false;
+    private static final String TAG = FileUtils.class.getSimpleName();
 
     private static void startService(Context context) {
         context.startServiceAsUser(new Intent(context, AutoHBMService.class),

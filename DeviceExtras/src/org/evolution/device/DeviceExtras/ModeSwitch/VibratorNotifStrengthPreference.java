@@ -1,6 +1,6 @@
 /*
 * Copyright (C) 2016 The OmniROM Project
-* Copyright (C) 2021 The Evolution X Project
+* Copyright (C) 2021-2022 The Evolution X Project
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -78,6 +78,8 @@ public class VibratorNotifStrengthPreference extends CustomSeekBarPreference {
             return;
         }
 
+        int[] mAllValues = context.getResources().getIntArray(R.array.vibrator_notif_strength_preference_array);
+        mDefVal = mAllValues[0];
         String storedValue = PreferenceManager.getDefaultSharedPreferences(context).getString(DeviceExtras.KEY_NOTIF_VIBSTRENGTH, String.valueOf(mDefVal));
         FileUtils.writeValue(getFile(context), storedValue);
     }

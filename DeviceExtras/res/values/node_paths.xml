@@ -41,6 +41,9 @@
     <!-- USB 2.0 Force fastcharge sysfs node path -->
     <string name="node_usb2_fast_charge_mode_switch">/sys/kernel/fast_charge/force_fast_charge</string>
 
+    <!-- OTG sysfs node path -->
+    <string name="otg_mode_switch">/sys/class/power_supply/usb/otg_switch</string>
+
     <!-- Call vibration sysfs node path -->
     <string name="node_vibrator_call_strength_preference">/sys/devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-03/c440000.qcom,spmi:qcom,pmi8998@3:qcom,haptics@c000/leds/vibrator/vmax_mv_call</string>
 
@@ -49,9 +52,6 @@
 
     <!-- System vibration sysfs node path -->
     <string name="node_vibrator_strength_preference">/sys/devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-03/c440000.qcom,spmi:qcom,pmi8998@3:qcom,haptics@c000/leds/vibrator/vmax_mv_user</string>
-	
-    <!-- Touchboost sysfs node path -->
-    <string name="node_touch_boost_switch">/sys/module/msm_performance/parameters/touchboost</string>
 
     <!-- Wide display mode sysfs node path -->
     <string name="node_wide_mode_switch">/sys/devices/platform/soc/ae00000.qcom,mdss_mdp/drm/card0/card0-DSI-1/native_display_wide_color_mode</string>
@@ -59,6 +59,9 @@
     <!-- Measuered FPS sysfs node path -->
     <string name="node_fps_info_service">/sys/devices/platform/soc/ae00000.qcom,mdss_mdp/drm/card0/sde-crtc-0/measured_fps</string>
 
-    <!-- GameMode sysfs node path -->
+    <!-- GameMode procfs node path -->
     <string name="node_game_mode_switch">/proc/touchpanel/game_switch_enable</string>
+
+    <!-- TP Edge Limit procfs node path -->
+    <string name="node_tp_edge_limit_mode_switch">/proc/touchpanel/tpedge_limit_enable</string>
 </resources>

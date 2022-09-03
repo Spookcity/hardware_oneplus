@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Copyright (c) 2021 The Evolution X project
+    Copyright (c) 2021-2022 The Evolution X project
     Copyright (C) 2018-2021 crDroid Android Project
+    Copyright (c) 2019 Havoc-OS
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -62,4 +63,9 @@
         <item>64</item>
         <item>63</item>
     </string-array>
+
+    <!-- Default action ids for a device's touchscreen gestures
+         The array should be sorted in the same order as the
+         touchscreen gestures advertised by the device's LineageHW impl. -->
+    <integer-array name="config_defaultTouchscreenGestureActions" />
 </resources>
